@@ -11,12 +11,15 @@ export async function POST(request: NextRequest) {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
     // validation
+    if (!username || !email || !password) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
 
     const user = await User.findOne({ email });
 
     if (user) {
       return NextResponse.json(
-        { error: "Users already exist" },
+        { error: "User already exist" },
         { status: 400 }
       );
     }
@@ -27,7 +30,7 @@ export async function POST(request: NextRequest) {
     const newUser = new User({
       username,
       email,
-      password: hashedPassword,
+      password: hashedPassword
     });
 
     const savedUser = await newUser.save();
@@ -39,7 +42,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: "User registered successfully",
       success: true,
-      savedUser,
+      savedUser
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
