@@ -23,12 +23,12 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       port: 2525,
       auth: {
         user: "e40895dab5a7c6", // ❌
-        pass: "********35fa", // ❌
+        pass: "b154b8318235fa", // ❌
       },
     });
 
     const mailOptions = {
-      from: "farhan@farhan.com", // sender address
+      from: "programmingwithfarhan@gmail.com", // sender address
       to: email, // list of receivers
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password", // Subject line

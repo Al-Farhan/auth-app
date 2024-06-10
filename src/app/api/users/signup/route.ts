@@ -4,14 +4,13 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
 
-connect();
+connect(); // We have to connect each time with database
 
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
     // validation
-    console.log(reqBody);
 
     const user = await User.findOne({ email });
 
